@@ -73,8 +73,6 @@ elseif ($IsWindows) {
     Get-ChildItem -Path $Destination -Recurse -Directory | ForEach-Object {
         icacls $_.FullName /inheritance:r /grant:r "$($env:UserName):(F)"
     }
-	# Normalize line endings for entrypoint
-	Get-Content "$Destination/entrypoint.sh" | Set-Content -Encoding utf8 -NoNewline "$Destination/entrypoint.sh"
 }
 
 # --- Run docker compose ---

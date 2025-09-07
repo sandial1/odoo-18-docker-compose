@@ -13,7 +13,7 @@ if (-not $Destination) {
 $Destination = Join-Path -Path (Get-Location) -ChildPath $Destination
 
 # --- Clone repo ---
-git clone --depth=1 https://github.com/minhng92/odoo-18-docker-compose $Destination
+git clone --depth=1 https://github.com/sandial1/odoo-18-docker-compose $Destination
 Remove-Item -Recurse -Force (Join-Path $Destination ".git")
 
 # --- Create PostgreSQL directory ---

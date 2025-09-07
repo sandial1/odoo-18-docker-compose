@@ -56,18 +56,18 @@ $composeFile = Join-Path $Destination "docker-compose.yml"
 
 # --- Reset file/dir permissions ---
 if ($IsLinux -or $IsMacOS) {
-    Get-ChildItem -Path $Destination -Recurse -File | ForEach-Object { chmod 644 $_.FullName }
-    Get-ChildItem -Path $Destination -Recurse -Directory | ForEach-Object { chmod 700 $_.FullName }	
-    chmod +x (Join-Path $Destination "entrypoint.sh")
-	#Get-ChildItem -Path $Destination -Recurse -File | ForEach-Object { chmod 777 $_.FullName }
-    #Get-ChildItem -Path $Destination -Recurse -Directory | ForEach-Object { chmod 777 $_.FullName }
-	#chmod +777 (Join-Path $Destination "entrypoint.sh")
+    #Get-ChildItem -Path $Destination -Recurse -File | ForEach-Object { chmod 644 $_.FullName }
+    #Get-ChildItem -Path $Destination -Recurse -Directory | ForEach-Object { chmod 700 $_.FullName }	
+    #chmod +x (Join-Path $Destination "entrypoint.sh")
+	Get-ChildItem -Path $Destination -Recurse -File | ForEach-Object { chmod 777 $_.FullName }
+    Get-ChildItem -Path $Destination -Recurse -Directory | ForEach-Object { chmod 777 $_.FullName }
+	chmod +777 (Join-Path $Destination "entrypoint.sh")
 }
 elseif ($IsWindows) {
     # Files: read/write for user only
     Get-ChildItem -Path $Destination -Recurse -File | ForEach-Object {
-        icacls $_.FullName /inheritance:r /grant:r "$($env:UserName):(R,W)"
-		#icacls $_.FullName /inheritance:r /grant:r "$($env:UserName):(F)"
+        #icacls $_.FullName /inheritance:r /grant:r "$($env:UserName):(R,W)"
+		icacls $_.FullName /inheritance:r /grant:r "$($env:UserName):(F)"
     }
     # Directories: full control for user
     Get-ChildItem -Path $Destination -Recurse -Directory | ForEach-Object {

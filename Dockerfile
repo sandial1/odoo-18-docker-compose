@@ -1,8 +1,8 @@
-FROM odoo:18
+FROM odoo:17
 
 USER root
 COPY entrypoint.sh /entrypoint.sh
-RUN chmod +777 /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 USER odoo
 
